@@ -1,0 +1,76 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  min-height: 3.5rem;
+
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+/* ---------- Title / Back — the left slot ---------- */
+
+.title,
+.back {
+  background: none;
+
+  border: none;
+  padding: var(--space-xs) 0;
+  margin-right: auto;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.back {
+  font-size: 1rem;
+}
+
+/* ---------- Nav — "hidden on mobile" ---------- */
+
+.nav {
+  display: none;
+
+  gap: var(--space-md);
+}
+
+.navButton {
+  background: none;
+  border: none;
+  padding: var(--space-xs) 0;
+  border-bottom: 2px solid transparent;
+
+  font-size: 0.9375rem;
+  opacity: 0.85;
+}
+
+.navButtonActive {
+    border-bottom-color: var(--color-on-primary);
+
+    opacity: 1;
+}
+
+/* ---------- Action — the right slot ---------- */
+
+.action {
+    display: flex;
+    align-items: center;
+}
+
+/* ---------- Desktop ---------- */
+
+@media (min-width: 600px) {
+    .header {
+        padding-inline: var(--space-xl);
+    }
+
+    .nav {
+        display: flex;
+    }
+}
+
+
