@@ -1,0 +1,104 @@
+.catalog {
+  width: min(100%, 1200px);
+  margin: 0 auto;
+  padding: 32px 20px 48px;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.heading {
+  margin: 0;
+  color: #163f31;
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.subtitle {
+  margin: 8px 0 0;
+  color: #5f716a;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.filterButton {
+  border: 1px solid #b8c8c0;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #163f31;
+  cursor: pointer;
+  font: inherit;
+  padding: 8px 14px;
+}
+
+.filterButton:hover,
+.filterButton:focus-visible,
+.activeFilter {
+  border-color: #163f31;
+  background: #163f31;
+  color: #ffffff;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.swiper {
+  margin-top: 24px;
+  padding: 0px 4px 48px;
+}
+
+.slide {
+  height: auto;
+}
+
+/* TODO: Remove these Swiper styles if the catalog stays a CSS grid. */
+
+.emptyState {
+  margin: 40px 0;
+  color: #5f716a;
+  font-size: 1rem;
+  text-align: center;
+}
+
+:global(.swiper-button-next),
+:global(.swiper-button-prev) {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #163f31;
+  color: #ffffff;
+}
+
+:global(.swiper-button-next::after),
+:global(.swiper-button-prev::after) {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+:global(.swiper-button-disabled) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .catalog {
+    padding: 48px 32px 64px;
+  }
+
+  .swiper {
+    padding-bottom: 56px;
+  }
+}

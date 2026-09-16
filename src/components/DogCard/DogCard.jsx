@@ -5,7 +5,7 @@ function DogCard({ dog, onSelect }) {
 
   return (
     <article className={`${styles.card} ${!dog.present ? styles.away :""}`}>
-      <img className={styles.thumbnail} src={dog.image} alt={dog.name} />
+      <img className={styles.thumbnail} src={dog.img} alt={dog.name} />
 
       <div className={styles.content}>
         <div className={styles.nameRow}>
