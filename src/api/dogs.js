@@ -32,7 +32,7 @@ export async function fetchDogs({ signal } = {}) {
   const json = await response.json();
 
   // Unwrap `record` here and nowhere else.
-  const list = Array.isArray(json.record) ? json.record : [];
+  const list = Array.isArray(json?.record) ? json.record : [];
 
   return list.map(normalizeDog);
 }
