@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Navigation, Pagination } from "swiper/modules";
+import { useDogs } from "../../hooks/useDogs";
+
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -8,19 +10,8 @@ import "swiper/css/navigation";
 import DogCard from "../../components/DogCard/DogCard";
 import styles from "./Catalog.module.css";
 
-const dogs = [
-  
- //Hårdkodat vi ändrar den sen när vi har fixat med API :D
-  /* { chipNumber: "DOG-001", name: "Milo", present: true, imageUrl: "https://s3.animalia.bio/pets/animals/photos/full/1x1/KbUZShTV58b44zK17o0gTyRPUJ4fXDjPIChE1RBX.webp?id=d9a66f40bbaf3f470adfdf0c4bb05e7a" },
-  { chipNumber: "DOG-002", name: "Luna", present: true, imageUrl: "https://cdn.britannica.com/44/233244-050-A65D4571/Chihuahua-dog.jpg" },
-  { chipNumber: "DOG-003", name: "Otis", present: false, imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Rusty.jpg/960px-Rusty.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail" },
-  { chipNumber: "DOG-004", name: "Nala", present: true, imageUrl: "https://static01.nyt.com/images/2024/06/30/multimedia/30sp-scipet-manifesto-vzjw/30sp-scipet-manifesto-vzjw-articleLarge.jpg?quality=75&auto=webp&disable=upscale" },
-  { chipNumber: "DOG-005", name: "Tony", present: true, imageUrl: "https://s3.animalia.bio/pets/animals/photos/full/1x1/KbUZShTV58b44zK17o0gTyRPUJ4fXDjPIChE1RBX.webp?id=d9a66f40bbaf3f470adfdf0c4bb05e7a" },
-  { chipNumber: "DOG-006", name: "Edgar", present: true, imageUrl: "https://cdn.britannica.com/44/233244-050-A65D4571/Chihuahua-dog.jpg" },
-  { chipNumber: "DOG-007", name: "Daisy", present: false, imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Rusty.jpg/960px-Rusty.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail" },
-  { chipNumber: "DOG-008", name: "Bimbi", present: true, imageUrl: "https://static01.nyt.com/images/2024/06/30/multimedia/30sp-scipet-manifesto-vzjw/30sp-scipet-manifesto-vzjw-articleLarge.jpg?quality=75&auto=webp&disable=upscale" },
-   */
-];
+
+
 
 const filters = [
   { value: "all", label: "All dogs" },
@@ -29,11 +20,12 @@ const filters = [
 ];
 
 function Catalog({ onNavigate }) {
+  const { dogs, isLoading, error, reload } = useDogs();
   const [activeFilter, setActiveFilter] = useState("all");
 
   const presentCount = useMemo(
     () => dogs.filter((dog) => dog.present).length,
-    []
+    [dogs]
   );
 
   const filteredDogs = useMemo(() => {
@@ -45,7 +37,7 @@ function Catalog({ onNavigate }) {
       default:
         return dogs;
     }
-  }, [activeFilter]);
+  }, [activeFilter, dogs]);
 
   const emptyMessages = {
     all: "No dogs to show right now.",
@@ -83,7 +75,7 @@ function Catalog({ onNavigate }) {
           key={activeFilter}
           className={styles.swiper}
           modules={[Navigation, A11y, Pagination]}
-          pagination={true}
+          pagination={false}
 
           spaceBetween={16}
           slidesPerView={1}
@@ -95,7 +87,7 @@ function Catalog({ onNavigate }) {
               spaceBetween: 20,
             },
             1024: {
-              slidesPerView: 2.1,
+              slidesPerView: 6,
               spaceBetween: 24,
             },
           }}
