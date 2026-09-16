@@ -4,7 +4,7 @@ function DogCard({ dog, onSelect }) {
   const breed = dog.breed.charAt(0).toUpperCase() + dog.breed.slice(1);
 
   return (
-    <article className={styles.card}>
+    <article className={`${styles.card} ${!dog.present ? styles.away :""}`}>
       <img className={styles.thumbnail} src={dog.image} alt={dog.name} />
 
       <div className={styles.content}>
@@ -21,7 +21,7 @@ function DogCard({ dog, onSelect }) {
           type="button"
           onClick={() => onSelect(dog.chipNumber)}
         >
-          View profile
+          View profile →
         </button>
       </div>
     </article>

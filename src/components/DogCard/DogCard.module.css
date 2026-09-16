@@ -40,11 +40,13 @@
 }
 
 .presenceDot {
-    width: var(--space-sm);
-    height: var(--space-sm);
+    width: var(--space-md);
+    height: var(--space-md);
 
     background: var(--color-accent);
     border-radius: var(--radius-pill);
+
+    flex-shrink: 0;
 }
 
 .details {
@@ -66,4 +68,14 @@
 
 .profileButton:hover {
     text-decoration: underline;
+}
+
+/*away mod*/
+.away .name,
+.away .details {
+  color: var(--color-text-muted);
+}
+
+.away .presenceDot {
+  background: var(--color-text-muted);
 }
