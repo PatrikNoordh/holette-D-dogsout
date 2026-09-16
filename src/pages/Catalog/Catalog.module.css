@@ -2,6 +2,14 @@
   width: min(100%, 1200px);
   margin: 0 auto;
   padding: 32px 20px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.catalog :global(.swiper-pagination) {
+  display: none;
 }
 
 .header {
@@ -27,6 +35,7 @@
 .filters {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 8px;
   margin-bottom: 24px;
 }
@@ -56,15 +65,28 @@
 }
 
 .swiper {
-  margin-top: 24px;
-  padding: 0px 4px 48px;
+  width: 100%;
+  max-width: 960px;
+  margin: 24px auto 0;
+  padding: 16px 12px 48px;
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+}
+
+.swiper :global(.swiper-pagination-bullet-active) {
+  background: #163f31;
+  width: 18px;
+  height: 18px;
+}
+.swiper :global(.swiper-pagination-bullet) {
+  width: 16px;
+  height: 16px;
 }
 
 .slide {
   height: auto;
 }
-
-/* TODO: Remove these Swiper styles if the catalog stays a CSS grid. */
 
 .emptyState {
   margin: 40px 0;
@@ -73,32 +95,16 @@
   text-align: center;
 }
 
-:global(.swiper-button-next),
-:global(.swiper-button-prev) {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #163f31;
-  color: #ffffff;
-}
-
-:global(.swiper-button-next::after),
-:global(.swiper-button-prev::after) {
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-:global(.swiper-button-disabled) {
-  opacity: 0;
-  pointer-events: none;
-}
-
-@media (min-width: 768px) {
-  .catalog {
-    padding: 48px 32px 64px;
+@media (min-width: 376px) {
+  .catalog :global(.swiper-pagination) {
+    display: block;
+    position: static;
+    transform: none;
+    padding: 0;
+    margin-top: 24px;
   }
+}
 
-  .swiper {
-    padding-bottom: 56px;
-  }
+.swiper {
+  padding: 24px 20px 56px;
 }
