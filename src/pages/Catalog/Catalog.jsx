@@ -1,17 +1,15 @@
 import { useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { A11y, Navigation, Pagination,} from "swiper/modules";
+import { Autoplay, Grid, Pagination } from "swiper/modules";
 import { useDogs } from "../../hooks/useDogs";
 
 
 import "swiper/css";
-import "swiper/css/navigation";
+import "swiper/css/grid";
+import "swiper/css/pagination";
 
 import DogCard from "../../components/DogCard/DogCard";
 import styles from "./Catalog.module.css";
-
-
-
 
 const filters = [
   { value: "all", label: "All dogs" },
@@ -20,12 +18,12 @@ const filters = [
 ];
 
 function Catalog({ onNavigate }) {
-  const { dogs, isLoading, error, reload } = useDogs();
+  const { dogs } = useDogs();
   const [activeFilter, setActiveFilter] = useState("all");
 
   const presentCount = useMemo(
     () => dogs.filter((dog) => dog.present).length,
-    [dogs]
+    [dogs],
   );
 
   const filteredDogs = useMemo(() => {
@@ -49,9 +47,7 @@ function Catalog({ onNavigate }) {
     <main className={styles.catalog}>
       <header className={styles.header}>
         <h1 className={styles.heading}>Our dogs</h1>
-        <p className={styles.subtitle}>
-          {presentCount} happy visitors today
-        </p>
+        <p className={styles.subtitle}>{presentCount} happy visitors today</p>
       </header>
 
       <div className={styles.filters} aria-label="Filter dogs" role="group">
@@ -74,27 +70,34 @@ function Catalog({ onNavigate }) {
         <Swiper
           key={activeFilter}
           className={styles.swiper}
-          modules={[Navigation, A11y, Pagination]}
-          pagination={false}
-          
-
-          spaceBetween={16}
-          slidesPerView={1}
-          
-          
+          modules={[Pagination, Autoplay, Grid]}
+          slidesPerView={3}
+          grid={{
+            rows: 2,
+            fill: "row",
+          }}
           breakpoints={{
-            600: {
+            0: {
               slidesPerView: 1,
-              spaceBetween: 20,
+              spaceBetween: 16,
             },
-            1024: {
-              slidesPerView: 6,
+            376: {
+              slidesPerView: 2,
+              spaceBetween: 16,
+            },
+            768: {
+              slidesPerView: 3,
               spaceBetween: 24,
             },
           }}
-          a11y={{
-            prevSlideMessage: "Previous dogs",
-            nextSlideMessage: "Next dogs",
+          grabCursor
+          autoplay={{
+            delay: 5000,
+            disableOnInteraction: false,
+          }}
+          pagination={{
+            clickable: true,
+            type: "bullets",
           }}
         >
           {filteredDogs.map((dog) => (
@@ -107,9 +110,7 @@ function Catalog({ onNavigate }) {
           ))}
         </Swiper>
       ) : (
-        <p className={styles.emptyState}>
-          {emptyMessages[activeFilter]}
-        </p>
+        <p className={styles.emptyState}>{emptyMessages[activeFilter]}</p>
       )}
     </main>
   );
