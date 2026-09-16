@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Grid, Pagination } from "swiper/modules";
 import { useDogs } from "../../hooks/useDogs";
 
+
 import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/pagination";
