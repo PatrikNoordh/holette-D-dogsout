@@ -47,6 +47,8 @@ export function useDogs() {
 
   const { overrides, setPresence } = usePresence();
 
+  // What the app sees: API data with local overrides applied.
+  // Rebuilt only when the API list or the overrides change.
   const dogs = useMemo ( () => 
     apiDogs.map((dog) => 
         dog.chipNumber in overrides 
@@ -56,6 +58,8 @@ export function useDogs() {
     [apiDogs, overrides]
   );
 
+  // Flip a dog's effective presence. Reads the merged list so toggling
+  // twice returns to the starting value.
   function togglePresence(chipNumber) {
     const dog = dogs.find((d) => d.chipNumber === chipNumber);
     if (!dog) return;
