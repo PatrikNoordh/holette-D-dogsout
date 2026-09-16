@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./Home.module.css";
-import { Autoplay, Pagination, EffectFade } from "swiper/modules";
+import { Autoplay, Pagination, EffectFade, Controller } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -48,7 +48,7 @@ function Home({ onNavigate }) {
           modules={[Autoplay, Pagination, EffectFade]}
           effect="fade"
           fadeEffect={{ crossFade: true }}
-          slidesPerView={1}
+          slidesPerView={1.1}
           spaceBetween={16}
           loop
           autoplay={{
@@ -68,7 +68,6 @@ function Home({ onNavigate }) {
             <figure className={styles.card}>
               <video
                 src={`${baseUrl}videos/dog-playing.mp4`}
-                controls
                 muted
                 playsInline
               />
@@ -76,23 +75,13 @@ function Home({ onNavigate }) {
           </SwiperSlide>
           <SwiperSlide data-swiper-autoplay="10000">
             <figure className={styles.card}>
-              <video
-                src={`${baseUrl}videos/hundlek.mp4`}
-                controls
-                muted
-                playsInline
-              />
+              <video src={`${baseUrl}videos/hundlek.mp4`} muted playsInline />
             </figure>
           </SwiperSlide>
 
           <SwiperSlide data-swiper-autoplay="10000">
             <figure className={styles.card}>
-              <video
-                src={`${baseUrl}videos/hundhem.mp4`}
-                controls
-                muted
-                playsInline
-              />
+              <video src={`${baseUrl}videos/hundhem.mp4`} muted playsInline />
             </figure>
           </SwiperSlide>
         </Swiper>
@@ -113,11 +102,15 @@ function Home({ onNavigate }) {
 
       <div className={styles.stats}>
         <div className={styles.statCard}>
-          <span className={styles.statNumber}>{stats ? stats.totalDogs : "…"}</span>
+          <span className={styles.statNumber}>
+            {stats ? stats.totalDogs : "…"}
+          </span>
           <span className={styles.statLabel}>i registret</span>
         </div>
         <div className={styles.statCard}>
-          <span className={styles.statNumber}>{stats ? stats.dogsToday : "…"}</span>
+          <span className={styles.statNumber}>
+            {stats ? stats.dogsToday : "…"}
+          </span>
           <span className={styles.statLabel}>här idag</span>
         </div>
       </div>
