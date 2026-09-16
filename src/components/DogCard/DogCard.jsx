@@ -1,11 +1,29 @@
-function DogCard({ dog, onSelect }) {
-  return (
-    <article>
-      <h2>{dog.name}</h2>
+import styles from "./DogCard.module.css";
 
-      <button type="button" onClick={() => onSelect(dog.chipNumber)}>
-        View profile
-      </button>
+function DogCard({ dog, onSelect }) {
+  const breed = dog.breed.charAt(0).toUpperCase() + dog.breed.slice(1);
+
+  return (
+    <article className={styles.card}>
+      <img className={styles.thumbnail} src={dog.image} alt={dog.name} />
+
+      <div className={styles.content}>
+        <div className={styles.nameRow}>
+          <h2 className={styles.name}>{dog.name}</h2>
+          <span className={styles.presenceDot} />
+        </div>
+
+        <p className={styles.details}>
+          {breed}, {dog.age} years
+        </p>
+        <button
+          className={styles.profileButton}
+          type="button"
+          onClick={() => onSelect(dog.chipNumber)}
+        >
+          View profile
+        </button>
+      </div>
     </article>
   );
 }
