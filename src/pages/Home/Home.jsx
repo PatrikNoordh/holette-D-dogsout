@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import styles from "./Home.module.css";
+import { useDogs } from "../../hooks/useDogs";
 import { Autoplay, Pagination, EffectFade } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -20,26 +21,10 @@ function syncVideosWithActiveSlide(swiper) {
   });
 }
 
-// TODO: Ska vara API anrop här (18 och 7 är bara  exempel)
-async function fetchDogStats() {
-  return { totalDogs: 18, dogsToday: 7 };
-}
-
 function Home({ onNavigate }) {
   const swiperRef = useRef(null);
-  const [stats, setStats] = useState(null);
-
-  useEffect(() => {
-    let isCancelled = false;
-
-    fetchDogStats().then((data) => {
-      if (!isCancelled) setStats(data);
-    });
-
-    return () => {
-      isCancelled = true;
-    };
-  }, []);
+  const { dogs, isLoading } = useDogs();
+  const dogsToday = dogs.filter((dog) => dog.present).length;
 
   return (
     <main className={styles.home}>
@@ -48,7 +33,7 @@ function Home({ onNavigate }) {
           modules={[Autoplay, Pagination, EffectFade]}
           effect="fade"
           fadeEffect={{ crossFade: true }}
-          slidesPerView={1}
+          slidesPerView={1.1}
           spaceBetween={16}
           loop
           autoplay={{
@@ -68,7 +53,6 @@ function Home({ onNavigate }) {
             <figure className={styles.card}>
               <video
                 src={`${baseUrl}videos/dog-playing.mp4`}
-                controls
                 muted
                 playsInline
               />
@@ -76,31 +60,21 @@ function Home({ onNavigate }) {
           </SwiperSlide>
           <SwiperSlide data-swiper-autoplay="10000">
             <figure className={styles.card}>
-              <video
-                src={`${baseUrl}videos/hundlek.mp4`}
-                controls
-                muted
-                playsInline
-              />
+              <video src={`${baseUrl}videos/hundlek.mp4`} muted playsInline />
             </figure>
           </SwiperSlide>
 
           <SwiperSlide data-swiper-autoplay="10000">
             <figure className={styles.card}>
-              <video
-                src={`${baseUrl}videos/hundhem.mp4`}
-                controls
-                muted
-                playsInline
-              />
+              <video src={`${baseUrl}videos/hundhem.mp4`} muted playsInline />
             </figure>
           </SwiperSlide>
         </Swiper>
       </section>
 
-      <h1 className={styles.title}>Välkommen!</h1>
+      <h1 className={styles.title}>Welcome!</h1>
       <p className={styles.subtitle}>
-        En trygg, rolig och aktiv dag för din bästa vän.
+        A safe, fun, and active day for your best friend.
       </p>
 
       <button
@@ -108,21 +82,25 @@ function Home({ onNavigate }) {
         className={styles.ctaButton}
         onClick={() => onNavigate("catalog")}
       >
-        Se våra hundar
+        See our dogs
       </button>
 
       <div className={styles.stats}>
         <div className={styles.statCard}>
-          <span className={styles.statNumber}>{stats ? stats.totalDogs : "…"}</span>
-          <span className={styles.statLabel}>i registret</span>
+          <span className={styles.statNumber}>
+            {isLoading ? "..." : dogs.length}
+          </span>
+          <span className={styles.statLabel}>in the register</span>
         </div>
         <div className={styles.statCard}>
-          <span className={styles.statNumber}>{stats ? stats.dogsToday : "…"}</span>
-          <span className={styles.statLabel}>här idag</span>
+          <span className={styles.statNumber}>
+            {isLoading ? "..." : dogsToday}
+          </span>
+          <span className={styles.statLabel}>here today</span>
         </div>
       </div>
 
-      <footer className={styles.footer}>Öppet vardagar 07:00–18:00</footer>
+      <footer className={styles.footer}>Open weekdays 07:00–18:00</footer>
     </main>
   );
 }
