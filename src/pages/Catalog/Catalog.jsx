@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { A11y, Navigation, Pagination } from "swiper/modules";
+import { A11y, Navigation, Pagination,} from "swiper/modules";
 import { useDogs } from "../../hooks/useDogs";
 
 
@@ -76,6 +76,7 @@ function Catalog({ onNavigate }) {
           className={styles.swiper}
           modules={[Navigation, A11y, Pagination]}
           pagination={false}
+          
 
           spaceBetween={16}
           slidesPerView={1}
