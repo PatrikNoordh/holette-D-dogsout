@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import styles from "./Home.module.css";
-import { useDogs } from "../../hooks/useDogs";
 import { Autoplay, Pagination, EffectFade } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -21,9 +20,8 @@ function syncVideosWithActiveSlide(swiper) {
   });
 }
 
-function Home({ onNavigate }) {
+function Home({ dogs, isLoading, error, onRetry, onNavigate }) {
   const swiperRef = useRef(null);
-  const { dogs, isLoading } = useDogs();
   const dogsToday = dogs.filter((dog) => dog.present).length;
 
   return (
@@ -85,20 +83,29 @@ function Home({ onNavigate }) {
         See our dogs
       </button>
 
-      <div className={styles.stats}>
-        <div className={styles.statCard}>
-          <span className={styles.statNumber}>
-            {isLoading ? "..." : dogs.length}
-          </span>
-          <span className={styles.statLabel}>in the register</span>
+      {error ? (
+        <div className={styles.stats}>
+          <p role="alert">{error}</p>
+          <button type="button" className={styles.ctaButton} onClick={onRetry}>
+            Try again
+          </button>
         </div>
-        <div className={styles.statCard}>
-          <span className={styles.statNumber}>
-            {isLoading ? "..." : dogsToday}
-          </span>
-          <span className={styles.statLabel}>here today</span>
+      ) : (
+        <div className={styles.stats}>
+          <div className={styles.statCard}>
+            <span className={styles.statNumber}>
+              {isLoading ? "..." : dogs.length}
+            </span>
+            <span className={styles.statLabel}>in the register</span>
+          </div>
+          <div className={styles.statCard}>
+            <span className={styles.statNumber}>
+              {isLoading ? "..." : dogsToday}
+            </span>
+            <span className={styles.statLabel}>here today</span>
+          </div>
         </div>
-      </div>
+      )}
 
       <footer className={styles.footer}>Open weekdays 07:00–18:00</footer>
     </main>
