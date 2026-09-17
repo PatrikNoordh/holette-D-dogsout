@@ -1,9 +1,11 @@
 import styles from "./AdminRow.module.css";
+import { useStrings } from "../../strings/LanguageContext";
 import placeholderImage from "../../assets/placeholderDog.png";
 
 function AdminRow({ dog, onToggle }) {
+  const { t } = useStrings();
   const breed = dog.breed.charAt(0).toUpperCase() + dog.breed.slice(1);
-  const sex = dog.sex === "female" ? "Female" : "Male";
+  const sex = dog.sex === "female" ? t.common.female : t.common.male;
   const { owner } = dog;
 
   const handleImageError = (event) => {
@@ -28,13 +30,15 @@ function AdminRow({ dog, onToggle }) {
 
         <p className={styles.details}>{breed}</p>
         <p className={styles.details}>
-          {dog.age} years · {sex}
+          {t.common.years(dog.age)} · {sex}
         </p>
 
-        <p className={styles.meta}>Chip: {dog.chipNumber}</p>
+        <p className={styles.meta}>
+          {t.admin.chip}: {dog.chipNumber}
+        </p>
 
         <p className={styles.meta}>
-          Owner: {owner.name} {owner.lastName}
+          {t.admin.owner}: {owner.name} {owner.lastName}
         </p>
 
         <a className={styles.phone} href={`tel:${owner.phoneNumber}`}>
@@ -46,13 +50,13 @@ function AdminRow({ dog, onToggle }) {
         type="button"
         role="switch"
         aria-checked={dog.present}
-        aria-label={`${dog.name} is ${dog.present ? "here" : "away"}`}
+        aria-label={t.admin.switchLabel(dog.name, dog.present)}
         className={styles.switch}
         onClick={() => onToggle(dog.chipNumber)}
       >
         <span className={styles.knob} aria-hidden="true" />
         <span className={styles.switchLabel}>
-          {dog.present ? "Here" : "Away"}
+          {dog.present ? t.admin.here : t.admin.away}
         </span>
       </button>
     </article>
