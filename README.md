@@ -154,8 +154,7 @@ feat/HDD-005-use-dogs-hook  →  dev  →  main  →  GitHub Pages
 ```
 
 - **One ticket, one branch, one PR.** Branches are named `type/HDD-NNN-short-description`
-- **Commits** follow `type [HDD-NNN] Present tense description`, e.g. `feat [HDD-005] Add useDogs hook`
-- **Types:** `feat` · `fix` · `style` · `refactor` · `chore` · `docs`
+- **Commit Types:** `feat` · `fix` · `style` · `refactor` · `chore` · `docs`
 - **PRs target `dev`**, are reviewed by another group member, and never merged by their author
 - **`dev` merges to `main`** when the group agrees the state is deployable; the live site is built from `main`
 - **Stage files by name** — never `git add .`
