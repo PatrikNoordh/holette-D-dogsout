@@ -9,6 +9,15 @@
   color: var(--color-on-primary);
 }
 
+.logo {
+  width: var(--space-xl);
+  height: var(--space-xl);
+
+  object-fit: cover;
+  border-radius: var(--radius-pill);
+  flex-shrink: 0;
+}
+
 /* ---------- Title / Back — the left slot ---------- */
 
 .title,
@@ -21,6 +30,10 @@
 }
 
 .title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+
   font-family: var(--font-heading);
   font-size: 1.25rem;
   font-weight: 700;
