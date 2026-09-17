@@ -22,7 +22,12 @@ function Header({ onNavigate, currentPage, backTo, action }) {
           className={styles.title}
           onClick={() => onNavigate("home")}
         >
-          Doggy Daycare
+          <img
+            className={styles.logo}
+            src="public/android-chrome-192x192.png"
+            alt=""
+          />
+          <span>Holette D Dogsout</span>
         </button>
       )}
 
