@@ -26,7 +26,7 @@ function Header({ onNavigate, currentPage, backTo, action }) {
         >
           <img
             className={styles.logo}
-            src="public/android-chrome-192x192.png"
+            src={`${import.meta.env.BASE_URL}android-chrome-192x192.png`}
             alt=""
           />
           <span>Holette D Dogsout</span>
