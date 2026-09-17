@@ -1,8 +1,6 @@
 import { useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Grid, Pagination } from "swiper/modules";
-import { useDogs } from "../../hooks/useDogs";
-
 
 import "swiper/css";
 import "swiper/css/grid";
@@ -17,8 +15,7 @@ const filters = [
   { value: "home", label: "At home" },
 ];
 
-function Catalog({ onNavigate }) {
-  const { dogs } = useDogs();
+function Catalog({ dogs, isLoading, error, onRetry, onNavigate }) {
   const [activeFilter, setActiveFilter] = useState("all");
 
   const presentCount = useMemo(
@@ -42,6 +39,27 @@ function Catalog({ onNavigate }) {
     present: "No dogs are here right now.",
     home: "All dogs are here today.",
   };
+
+  if (isLoading) {
+    return (
+      <main className={styles.catalog}>
+        <p className={styles.emptyState}>Loading dogs...</p>
+      </main>
+    );
+  }
+
+  if (error) {
+    return (
+      <main className={styles.catalog}>
+        <p className={styles.emptyState} role="alert">
+          {error}
+        </p>
+        <button type="button" className={styles.filterButton} onClick={onRetry}>
+          Try again
+        </button>
+      </main>
+    );
+  }
 
   return (
     <main className={styles.catalog}>

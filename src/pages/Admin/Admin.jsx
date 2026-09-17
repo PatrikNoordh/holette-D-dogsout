@@ -1,10 +1,9 @@
 import { useMemo } from "react";
-import { useDogs } from "../../hooks/useDogs";
 import AdminRow from "./AdminRow";
 import styles from "./Admin.module.css";
 
-function Admin() {
-  const { dogs, isLoading, error, reload, togglePresence } = useDogs();
+function Admin({ dogs, isLoading, error, onRetry, onToggle }) {
+  
 
   const sortedDogs = useMemo(
     () =>
@@ -31,7 +30,7 @@ function Admin() {
     return (
       <main className={styles.admin}>
         <p className={styles.status} role="alert">{error}</p>
-        <button type="button" className={styles.retry} onClick={reload}>
+        <button type="button" className={styles.retry} onClick={onRetry}>
           Try again
         </button>
       </main>
@@ -58,7 +57,7 @@ function Admin() {
       <ul className={styles.list}>
         {sortedDogs.map((dog) => (
           <li key={dog.chipNumber}>
-            <AdminRow dog={dog} onToggle={togglePresence} />
+            <AdminRow dog={dog} onToggle={onToggle} />
           </li>
         ))}
       </ul>

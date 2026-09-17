@@ -1,10 +1,8 @@
-import { useDogs } from '../../hooks/useDogs'
 import styles from './DogDetail.module.css'
 import placeholderImage from '../../assets/placeholderDog.png'
 
-function DogDetail({ chipNumber, onNavigate }) {
+function DogDetail({ dogs, isLoading, error, onRetry, chipNumber, onNavigate }) {
 
-  const { dogs, isLoading, error  } = useDogs()
 
   const handleImageError = (event) => {
     event.currentTarget.onerror = null
@@ -21,15 +19,20 @@ function DogDetail({ chipNumber, onNavigate }) {
   
 }
 
-  if (error) {
-    return(
-    <main className={styles.page}>
-      <p>{error} </p>
-    </main>
-    
-  )
-  
-}
+    if (error) {
+    return (
+      <main className={styles.page}>
+        <p role="alert">{error}</p>
+        <button
+          className={styles.catalogButton}
+          type="button"
+          onClick={onRetry}
+        >
+          Try again
+        </button>
+      </main>
+    )
+  }
 
   const dog = dogs.find((dog) => dog.chipNumber === chipNumber)
 
