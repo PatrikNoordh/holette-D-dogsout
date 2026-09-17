@@ -1,11 +1,17 @@
 import styles from "./DogCard.module.css";
+import placeholderImage from "../../assets/placeholderDog.png"
 
 function DogCard({ dog, onSelect }) {
   const breed = dog.breed.charAt(0).toUpperCase() + dog.breed.slice(1);
 
+  const handleImageError = (event) => {
+    event.currentTarget.onerror = null;
+    event.currentTarget.src = placeholderImage;
+  };
+
   return (
     <article className={`${styles.card} ${!dog.present ? styles.away :""}`}>
-      <img className={styles.thumbnail} src={dog.img} alt={dog.name} />
+      <img className={styles.thumbnail} src={dog.img || placeholderImage} alt={dog.name} onError={handleImageError}/>
 
       <div className={styles.content}>
         <div className={styles.nameRow}>
