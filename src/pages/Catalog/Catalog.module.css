@@ -27,7 +27,7 @@
 
 .subtitle {
   margin: var(--space-sm) 0 0;
-  color: var(--color-text-muted);
+  color: var(--color-text);
   font-size: 1rem;
   line-height: 1.5;
 }
@@ -89,7 +89,7 @@
 
 .emptyState {
   margin: var(--space-xl) 0;
-  color: var(--color-text-muted);
+  color: var(--color-text);
   font-size: 1rem;
   text-align: center;
 }

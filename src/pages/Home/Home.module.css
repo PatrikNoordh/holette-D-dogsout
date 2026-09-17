@@ -41,7 +41,7 @@
 
 .subtitle {
   margin: 0 0 var(--space-lg);
-  color: var(--color-text-muted);
+  color: var(--color-text);
   font-family: var(--font-body);
   font-size: 0.95rem;
 }
@@ -86,14 +86,14 @@
 }
 
 .statLabel {
-  color: var(--color-text-muted);
+  color: var(--color-text);
   font-family: var(--font-body);
   font-size: 0.85rem;
 }
 
 .footer {
   margin-top: auto;
-  color: var(--color-text-muted);
+  color: var(--color-text);
   font-family: var(--font-body);
   font-size: 0.85rem;
 }
