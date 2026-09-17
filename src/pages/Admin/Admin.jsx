@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import AdminRow from "./AdminRow";
 import { useStrings } from "../../strings/LanguageContext";
 import styles from "./Admin.module.css";
@@ -6,16 +6,29 @@ import styles from "./Admin.module.css";
 function Admin({ dogs, isLoading, error, onRetry, onToggle }) {
   const { t } = useStrings();
 
-  const sortedDogs = useMemo(
-    () =>
-      [...dogs].sort((a, b) => {
-        if (a.present !== b.present) {
-          return a.present ? -1 : 1;
-        }
-        return a.name.localeCompare(b.name);
-      }),
-    [dogs],
-  );
+  const orderRef = useRef(null);
+
+  const sortedDogs = useMemo(() => {
+    if (dogs.length === 0) return [];
+
+    if (orderRef.current === null) {
+      orderRef.current = [...dogs]
+        .sort((a, b) => {
+          if (a.present !== b.present) {
+            return a.present ? -1 : 1;
+          }
+          return a.name.localeCompare(b.name);
+        })
+        .map((dog) => dog.chipNumber);
+    }
+
+
+    const position = new Map(orderRef.current.map((chip, i) => [chip, i]));
+    return [...dogs].sort(
+      (a, b) => position.get(a.chipNumber) - position.get(b.chipNumber)
+    );
+  }, [dogs]);
+  
 
   const presentCount = dogs.filter((dog) => dog.present).length;
 
