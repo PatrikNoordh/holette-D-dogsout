@@ -44,6 +44,10 @@
     color: var(--color-text);
 }
 
+.home {
+    background: var(--color-text-muted);
+}
+
 .chips {
     display: flex;
     justify-content: center;
@@ -54,16 +58,6 @@
 
 .present {
     background: var(--color-accent);
-}
-
-.backButton {
-    margin-bottom: var(--space-md);
-    padding: var(--space-xs) var(--space-sm);
-    border: none;
-    background: transparent;
-    color: var(--color-text);
-    font: inherit;
-    cursor: pointer;
 }
 
 .catalogButton {

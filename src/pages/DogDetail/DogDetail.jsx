@@ -47,13 +47,7 @@ function DogDetail({ chipNumber, onNavigate }) {
 return (
   <main className={styles.page}>
     <div className={styles.card}>
-    <button
-      className={styles.backButton} 
-      type="button"
-      onClick={() => onNavigate('catalog')}
-    >
-      ← Back
-    </button>
+
 
     <img
       className={styles.image} 
@@ -71,7 +65,7 @@ return (
     </span>
 
     <span 
-      className={`${styles.chip} ${dog.present ? styles.present : ''}`}
+      className={`${styles.chip} ${dog.present ? styles.present : styles.home }`}
       >
       {dog.present ? 'Here today' : 'At home'}
       </span>
@@ -82,7 +76,7 @@ return (
         type="button"
         onClick={() => onNavigate('catalog')}
       >
-        Back to catalog
+        Back to our dogs
       </button>
 
     </div>  
