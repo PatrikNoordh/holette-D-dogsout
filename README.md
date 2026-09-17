@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/apple-touch-icon.png" alt="Holette D Dogsout logo" width="120">
+</p>
+
 # Holette D Dogsout
 
 A React web app for a dog daycare that keeps track of the dogs visiting them — which dogs are registered, which ones are here today, and who to call about each one.
