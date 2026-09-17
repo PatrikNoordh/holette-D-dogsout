@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useStrings } from "../../strings/LanguageContext";
 import { Autoplay, Grid, Pagination } from "swiper/modules";
 
 import "swiper/css";
@@ -9,14 +10,15 @@ import "swiper/css/pagination";
 import DogCard from "../../components/DogCard/DogCard";
 import styles from "./Catalog.module.css";
 
-const filters = [
-  { value: "all", label: "All dogs" },
-  { value: "present", label: "Here today" },
-  { value: "home", label: "At home" },
-];
-
 function Catalog({ dogs, isLoading, error, onRetry, onNavigate }) {
+  const { t } = useStrings();
   const [activeFilter, setActiveFilter] = useState("all");
+
+  const filters = [
+    { value: "all", label: t.catalog.all },
+    { value: "present", label: t.catalog.here },
+    { value: "home", label: t.catalog.away },
+  ];
 
   const presentCount = useMemo(
     () => dogs.filter((dog) => dog.present).length,
@@ -35,15 +37,15 @@ function Catalog({ dogs, isLoading, error, onRetry, onNavigate }) {
   }, [activeFilter, dogs]);
 
   const emptyMessages = {
-    all: "No dogs to show right now.",
-    present: "No dogs are here right now.",
-    home: "All dogs are here today.",
+    all: t.catalog.emptyAll,
+    present: t.catalog.emptyHere,
+    home: t.catalog.emptyAway,
   };
 
   if (isLoading) {
     return (
       <main className={styles.catalog}>
-        <p className={styles.emptyState}>Loading dogs...</p>
+        <p className={styles.emptyState}>{t.common.loading}</p>
       </main>
     );
   }
@@ -52,10 +54,10 @@ function Catalog({ dogs, isLoading, error, onRetry, onNavigate }) {
     return (
       <main className={styles.catalog}>
         <p className={styles.emptyState} role="alert">
-          {error}
+          {t.common.error}
         </p>
         <button type="button" className={styles.filterButton} onClick={onRetry}>
-          Try again
+          {t.common.retry}
         </button>
       </main>
     );
@@ -64,11 +66,15 @@ function Catalog({ dogs, isLoading, error, onRetry, onNavigate }) {
   return (
     <main className={styles.catalog}>
       <header className={styles.header}>
-        <h1 className={styles.heading}>Our dogs</h1>
-        <p className={styles.subtitle}>{presentCount} happy visitors today</p>
+        <h1 className={styles.heading}>{t.catalog.title}</h1>
+        <p className={styles.subtitle}>{t.catalog.visitors(presentCount)}</p>
       </header>
 
-      <div className={styles.filters} aria-label="Filter dogs" role="group">
+      <div
+        className={styles.filters}
+        aria-label={t.catalog.filterLabel}
+        role="group"
+      >
         {filters.map((filter) => (
           <button
             key={filter.value}

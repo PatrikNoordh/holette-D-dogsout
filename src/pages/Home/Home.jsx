@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
+import { useStrings } from "../../strings/LanguageContext";
 const baseUrl = import.meta.env.BASE_URL;
 
 function syncVideosWithActiveSlide(swiper) {
@@ -21,6 +22,7 @@ function syncVideosWithActiveSlide(swiper) {
 }
 
 function Home({ dogs, isLoading, error, onRetry, onNavigate }) {
+  const { t } = useStrings();
   const swiperRef = useRef(null);
   const dogsToday = dogs.filter((dog) => dog.present).length;
 
@@ -70,9 +72,9 @@ function Home({ dogs, isLoading, error, onRetry, onNavigate }) {
         </Swiper>
       </section>
 
-      <h1 className={styles.title}>Welcome!</h1>
+      <h1 className={styles.title}>{t.home.welcome}</h1>
       <p className={styles.subtitle}>
-        A safe, fun, and active day for your best friend.
+        {t.home.tagline}
       </p>
 
       <button
@@ -80,14 +82,14 @@ function Home({ dogs, isLoading, error, onRetry, onNavigate }) {
         className={styles.ctaButton}
         onClick={() => onNavigate("catalog")}
       >
-        See our dogs
+        {t.home.seeDogs}
       </button>
 
       {error ? (
         <div className={styles.stats}>
-          <p role="alert">{error}</p>
+          <p role="alert">{t.common.error}</p>
           <button type="button" className={styles.ctaButton} onClick={onRetry}>
-            Try again
+            {t.common.retry}
           </button>
         </div>
       ) : (
@@ -96,18 +98,18 @@ function Home({ dogs, isLoading, error, onRetry, onNavigate }) {
             <span className={styles.statNumber}>
               {isLoading ? "..." : dogs.length}
             </span>
-            <span className={styles.statLabel}>in the register</span>
+            <span className={styles.statLabel}>{t.home.registered}</span>
           </div>
           <div className={styles.statCard}>
             <span className={styles.statNumber}>
               {isLoading ? "..." : dogsToday}
             </span>
-            <span className={styles.statLabel}>here today</span>
+            <span className={styles.statLabel}>{t.home.hereToday}</span>
           </div>
         </div>
       )}
 
-      <footer className={styles.footer}>Open weekdays 07:00–18:00</footer>
+      <footer className={styles.footer}>{t.home.hours}</footer>
     </main>
   );
 }

@@ -1,9 +1,10 @@
 import { useMemo } from "react";
 import AdminRow from "./AdminRow";
+import { useStrings } from "../../strings/LanguageContext";
 import styles from "./Admin.module.css";
 
 function Admin({ dogs, isLoading, error, onRetry, onToggle }) {
-  
+  const { t } = useStrings();
 
   const sortedDogs = useMemo(
     () =>
@@ -21,7 +22,7 @@ function Admin({ dogs, isLoading, error, onRetry, onToggle }) {
   if (isLoading) {
     return (
       <main className={styles.admin}>
-        <p className={styles.status}>Loading dogs…</p>
+        <p className={styles.status}>{t.common.loading}</p>
       </main>
     );
   }
@@ -29,9 +30,11 @@ function Admin({ dogs, isLoading, error, onRetry, onToggle }) {
   if (error) {
     return (
       <main className={styles.admin}>
-        <p className={styles.status} role="alert">{error}</p>
+        <p className={styles.status} role="alert">
+          {t.common.error}
+        </p>
         <button type="button" className={styles.retry} onClick={onRetry}>
-          Try again
+          {t.common.retry}
         </button>
       </main>
     );
@@ -40,7 +43,7 @@ function Admin({ dogs, isLoading, error, onRetry, onToggle }) {
   if (dogs.length === 0) {
     return (
       <main className={styles.admin}>
-        <p className={styles.status}>No dogs registered yet.</p>
+        <p className={styles.status}>{t.common.empty}</p>
       </main>
     );
   }
@@ -48,9 +51,9 @@ function Admin({ dogs, isLoading, error, onRetry, onToggle }) {
   return (
     <main className={styles.admin}>
       <header className={styles.header}>
-        <h1 className={styles.heading}>Admin</h1>
+        <h1 className={styles.heading}>{t.admin.title}</h1>
         <p className={styles.subtitle}>
-          {presentCount} of {dogs.length} dogs here today
+          {t.admin.summary(presentCount, dogs.length)}
         </p>
       </header>
 

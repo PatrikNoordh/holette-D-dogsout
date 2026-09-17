@@ -1,7 +1,9 @@
 import styles from "./DogCard.module.css";
-import placeholderImage from "../../assets/placeholderDog.png"
+import { useStrings } from "../../strings/LanguageContext";
+import placeholderImage from "../../assets/placeholderDog.png";
 
 function DogCard({ dog, onSelect }) {
+  const { t } = useStrings();
   const breed = dog.breed.charAt(0).toUpperCase() + dog.breed.slice(1);
 
   const handleImageError = (event) => {
@@ -10,8 +12,13 @@ function DogCard({ dog, onSelect }) {
   };
 
   return (
-    <article className={`${styles.card} ${!dog.present ? styles.away :""}`}>
-      <img className={styles.thumbnail} src={dog.img || placeholderImage} alt={dog.name} onError={handleImageError}/>
+    <article className={`${styles.card} ${!dog.present ? styles.away : ""}`}>
+      <img
+        className={styles.thumbnail}
+        src={dog.img || placeholderImage}
+        alt={dog.name}
+        onError={handleImageError}
+      />
 
       <div className={styles.content}>
         <div className={styles.nameRow}>
@@ -20,14 +27,14 @@ function DogCard({ dog, onSelect }) {
         </div>
 
         <p className={styles.details}>
-          {breed}, {dog.age} years
+          {breed}, {t.common.years(dog.age)}
         </p>
         <button
           className={styles.profileButton}
           type="button"
           onClick={() => onSelect(dog.chipNumber)}
         >
-          View profile →
+          {t.dogCard.viewProfile}
         </button>
       </div>
     </article>

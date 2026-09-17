@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home";
 import Catalog from "./pages/Catalog/Catalog";
 import DogDetail from "./pages/DogDetail/DogDetail";
 import Admin from "./pages/Admin/Admin";
+import { useStrings } from "./strings/LanguageContext";
 import { useDogs } from "./hooks/useDogs";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
   const [selectedChip, setSelectedChip] = useState(null);
 
   const { dogs, isLoading, error, reload, togglePresence } = useDogs();
+  const { t } = useStrings();
 
   function navigate(to, chip = null) {
     setPage(to);
@@ -50,7 +52,7 @@ function App() {
         action={
           page === "home" ? (
             <button type="button" onClick={() => navigate("admin")}>
-              Admin
+              {t.header.admin}
             </button>
           ) : undefined
         }
