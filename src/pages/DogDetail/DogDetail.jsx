@@ -1,9 +1,15 @@
 import { useDogs } from '../../hooks/useDogs'
 import styles from './DogDetail.module.css'
+import placeholderImage from '../../assets/placeholderDog.png'
 
 function DogDetail({ chipNumber, onNavigate }) {
 
   const { dogs, isLoading, error  } = useDogs()
+
+  const handleImageError = (event) => {
+    event.currentTarget.onerror = null
+    event.currentTarget.src = placeholderImage
+  }
 
   if (isLoading) {
     return ( 
@@ -51,8 +57,9 @@ return (
 
     <img
       className={styles.image} 
-      src={dog.img}
+      src={dog.img || placeholderImage}
       alt={dog.name}
+      onError={handleImageError}
     />
 
     <h1 className={styles.name}>{dog.name}</h1>
