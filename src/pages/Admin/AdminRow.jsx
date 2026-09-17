@@ -15,8 +15,9 @@ function AdminRow({ dog, onToggle }) {
           <span className={styles.presenceDot} aria-hidden="true" />
         </div>
 
+        <p className={styles.details}>{breed}</p>
         <p className={styles.details}>
-          {breed}, {dog.age} years, {sex}
+          {dog.age} years · {sex}
         </p>
 
         <p className={styles.meta}>Chip: {dog.chipNumber}</p>
