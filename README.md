@@ -4,7 +4,7 @@ A React web app for a dog daycare that keeps track of the dogs visiting them —
 
 Live site: <https://patriknoordh.github.io/holette-D-dogsout/>
 
-https://github.com/user-attachments/assets/955b186b-23ed-4b5b-8e81-fcbb44c97fdf
+![App demo](docs/demo.gif)
 
 ## Table of Contents
 - [UX](#ux)
