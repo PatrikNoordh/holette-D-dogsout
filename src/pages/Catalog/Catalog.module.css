@@ -1,25 +1,33 @@
 .catalog {
   width: min(100%, 1200px);
   margin: 0 auto;
-  padding: 32px 20px 48px;
+  padding: var(--space-xl) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.catalog :global(.swiper-pagination) {
+  display: none;
 }
 
 .header {
-  margin-bottom: 24px;
+  margin-bottom: var(--space-lg);
 }
 
 .heading {
   margin: 0;
-  color: #163f31;
+  color: var(--color-primary);
   font-size: clamp(2rem, 6vw, 3.25rem);
   font-weight: 700;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   line-height: 1.05;
 }
 
 .subtitle {
-  margin: 8px 0 0;
-  color: #5f716a;
+  margin: var(--space-sm) 0 0;
+  color: var(--color-text-muted);
   font-size: 1rem;
   line-height: 1.5;
 }
@@ -27,26 +35,26 @@
 .filters {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 24px;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
 }
 
 .filterButton {
-  border: 1px solid #b8c8c0;
-  border-radius: 999px;
-  background: #ffffff;
-  color: #163f31;
-  cursor: pointer;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-primary);
   font: inherit;
-  padding: 8px 14px;
+  padding: var(--space-sm) var(--space-md);
 }
 
 .filterButton:hover,
 .filterButton:focus-visible,
 .activeFilter {
-  border-color: #163f31;
-  background: #163f31;
-  color: #ffffff;
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
 }
 
 .grid {
@@ -56,49 +64,46 @@
 }
 
 .swiper {
-  margin-top: 24px;
-  padding: 0px 4px 48px;
+  width: 100%;
+  max-width: 960px;
+  margin: var(--space-lg) auto 0;
+  padding: var(--space-md) var(--space-sm) var(--space-xl);
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+}
+
+.swiper :global(.swiper-pagination-bullet-active) {
+  background: var(--color-primary);
+  width: 18px;
+  height: 18px;
+}
+.swiper :global(.swiper-pagination-bullet) {
+  width: 16px;
+  height: 16px;
 }
 
 .slide {
   height: auto;
 }
 
-/* TODO: Remove these Swiper styles if the catalog stays a CSS grid. */
-
 .emptyState {
-  margin: 40px 0;
-  color: #5f716a;
+  margin: var(--space-xl) 0;
+  color: var(--color-text-muted);
   font-size: 1rem;
   text-align: center;
 }
 
-:global(.swiper-button-next),
-:global(.swiper-button-prev) {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #163f31;
-  color: #ffffff;
-}
-
-:global(.swiper-button-next::after),
-:global(.swiper-button-prev::after) {
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-:global(.swiper-button-disabled) {
-  opacity: 0;
-  pointer-events: none;
-}
-
-@media (min-width: 768px) {
-  .catalog {
-    padding: 48px 32px 64px;
+@media (min-width: 376px) {
+  .catalog :global(.swiper-pagination) {
+    display: block;
+    position: static;
+    transform: none;
+    padding: 0;
+    margin-top: var(--space-lg);
   }
+}
 
-  .swiper {
-    padding-bottom: 56px;
-  }
+.swiper {
+  padding: var(--space-lg) var(--space-lg) var(--space-xl);
 }
