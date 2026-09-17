@@ -1,13 +1,24 @@
 import styles from "./AdminRow.module.css";
+import placeholderImage from "../../assets/placeholderDog.png";
 
 function AdminRow({ dog, onToggle }) {
   const breed = dog.breed.charAt(0).toUpperCase() + dog.breed.slice(1);
   const sex = dog.sex === "female" ? "Female" : "Male";
   const { owner } = dog;
 
+  const handleImageError = (event) => {
+    event.currentTarget.onerror = null;
+    event.currentTarget.src = placeholderImage;
+  };
+
   return (
     <article className={`${styles.card} ${!dog.present ? styles.away : ""}`}>
-      <img className={styles.thumbnail} src={dog.img} alt={dog.name} />
+      <img
+        className={styles.thumbnail}
+        src={dog.img || placeholderImage}
+        alt={dog.name}
+        onError={handleImageError}
+      />
 
       <div className={styles.content}>
         <div className={styles.nameRow}>
