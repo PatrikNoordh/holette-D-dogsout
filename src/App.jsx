@@ -3,7 +3,6 @@ import Header from './components/Header/Header';
 import Home from './pages/Home/Home';
 import Catalog from './pages/Catalog/Catalog';
 import DogDetail from './pages/DogDetail/DogDetail';
-import Admin from './pages/Admin/Admin';
 
 
 
@@ -26,12 +25,6 @@ function App() {
     content = <DogDetail chipNumber={selectedChip} onNavigate={navigate} />;
   }
 
-  if (page === 'admin') {
-    content = <Admin />;
-  }
-
-  const backTo = { detail: 'catalog', admin: 'home'} [page];
-
   
 
   return (
@@ -39,14 +32,7 @@ function App() {
     <Header
       onNavigate={navigate}
       currentPage={page}
-      backTo={backTo}
-      action={
-        page === 'home' ? (
-          <button type="button" onClick={() => navigate('admin')}>
-            Admin
-          </button>
-        ) : undefined
-      }
+      backTo={page === 'detail' ? 'catalog' : undefined}
     />
     {content}
     </>
